@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <embed id="pluginId" type="application/x-np-piao">
+</body>
+
+</html>
+<script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.dev.js"></script>
+<script>
+    window.onload = function () {
+
+        var plugin = document.querySelector("#pluginId");
+
+        if (plugin && plugin.GetSig) {
+            var socket = io();
+            socket.on('sendBaseStr', function (baseStr) {
+                socket.emit('reviceCode', plugin.GetSig(baseStr));
+            });
+        }
+    }
+</script>
